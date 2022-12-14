@@ -112,6 +112,7 @@
                   </grid>
                 </constraints>
                 <properties>
+                  <editable value="false"/>
                   <font size="16"/>
                 </properties>
               </component>
