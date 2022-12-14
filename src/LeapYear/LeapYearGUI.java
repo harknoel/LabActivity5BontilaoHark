@@ -19,20 +19,25 @@ public class LeapYearGUI extends JFrame {
     }
 
     void isLeapYear() {
-        int year = Integer.parseInt(tfYear.getText());
-        if ((year % 4 == 0 && year % 100 != 0 ) || (year % 400 == 0)) {
-            JOptionPane.showMessageDialog(panel1, "Leap Year");
-        } else {
-            JOptionPane.showMessageDialog(panel1, "Not a leap Year");
+        try {
+            int year = Integer.parseInt(tfYear.getText());
+            if ((year % 4 == 0 && year % 100 != 0 ) || (year % 400 == 0)) {
+                JOptionPane.showMessageDialog(panel1, "Leap Year");
+            } else {
+                JOptionPane.showMessageDialog(panel1, "Not a leap Year");
+            }
+        } catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(panel1, "Invalid Argument", "Error", JOptionPane.ERROR_MESSAGE);
+            tfYear.setText("");
         }
     }
     public static void main(String[] args) {
         LeapYearGUI LeapYearGUI = new LeapYearGUI();
         LeapYearGUI.setTitle("Leap Year Checker");
+        LeapYearGUI.setLocationRelativeTo(null);
         LeapYearGUI.setContentPane(LeapYearGUI.panel1);
         LeapYearGUI.setSize(500, 250);
         LeapYearGUI.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        LeapYearGUI.setLocationRelativeTo(null);
         LeapYearGUI.setVisible(true);
     }
 }
