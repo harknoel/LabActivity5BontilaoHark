@@ -40,13 +40,23 @@ public class FoodOrderGUI extends JFrame {
         btnOrder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(panel1, String.format("The total price is Php %.2f", sumOrderDiscount()));
-                for(JCheckBox bgFood: bgFoods.keySet()) {
-                    if(bgFood.isSelected()) {
-                        bgFood.setSelected(false);
+                try {
+                    double result = sumOrderDiscount();
+                    if (result == 0) {
+                        throw new Exception();
                     }
+                    JOptionPane.showMessageDialog(panel1, String.format("The total price is Php %.2f", result));
+                    for (JCheckBox bgFood : bgFoods.keySet()) {
+                        if (bgFood.isSelected()) {
+                            bgFood.setSelected(false);
+                        }
+                    }
+                    rbNone.setSelected(true);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panel1, "No food items selected.", "Error", JOptionPane.ERROR_MESSAGE);
+                    rbNone.setSelected(true);
                 }
-                rbNone.setSelected(true);
+
             }
         });
     }
@@ -74,7 +84,6 @@ public class FoodOrderGUI extends JFrame {
                 sum += bgFoods.get(bgFood);
             }
         }
-        System.out.println(sum);
         return sum;
     }
     public static void main(String[] args) {
